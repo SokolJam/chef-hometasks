@@ -1,0 +1,9 @@
+#
+# Cookbook Name:: nginx-repo
+# Recipe:: default
+#
+#  The default recipe installs & configures NGINX repositories per
+#  http://nginx.org/en/linux_packages.html for yum.
+
+fail('platform family is unsupported') unless platform_family?('rhel')
+include_recipe 'nginx-repo::_yum' if platform_family?('rhel')

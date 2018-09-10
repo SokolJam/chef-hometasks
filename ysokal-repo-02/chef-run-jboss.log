@@ -1,0 +1,56 @@
+jboss Starting Chef Client, version 14.4.56[0m
+jboss resolving cookbooks for run list: ["jboss"][0m
+jboss Synchronizing Cookbooks:[0m
+jboss   - jboss (0.1.0)[0m
+jboss Installing Cookbook Gems:[0m
+jboss Compiling Cookbooks...[0m
+jboss Converging 9 resources[0m
+jboss Recipe: jboss::default[0m
+jboss   * yum_package[java-1.8.0-openjdk] action install
+jboss     [32m- install version 1:1.8.0.181-3.b13.el7_5.x86_64 of package java-1.8.0-openjdk[0m
+jboss [0m  * yum_package[unzip] action install
+jboss     [32m- install version 0:6.0-19.el7.x86_64 of package unzip[0m
+jboss [0m  * linux_user[jboss] action create
+jboss     [32m- create user jboss[0m
+jboss [0m  * remote_file[/tmp/jboss.zip] action create
+jboss     [32m- create new file /tmp/jboss.zip[0m
+jboss     [32m- update content in file /tmp/jboss.zip from none to be93bc[0m
+jboss     [37m(file sizes exceed 10000000 bytes, diff output suppressed)[0m
+jboss [0m  * bash[unzip] action run
+jboss     [32m- execute "bash"  "/tmp/chef-script20180910-4005-6b7zwl"[0m
+jboss [0m  * execute[systemctl daemon-reload] action nothing (skipped due to action :nothing)
+jboss   * template[/etc/systemd/system/jboss.service] action create
+jboss     [32m- create new file /etc/systemd/system/jboss.service[0m
+jboss     [32m- update content in file /etc/systemd/system/jboss.service from none to 6f0fb3[0m
+jboss     [37m--- /etc/systemd/system/jboss.service	2018-09-10 20:47:22.839745150 +0100[0m
+jboss     [37m+++ /etc/systemd/system/.chef-jboss20180910-4005-owg3az.service	2018-09-10 20:47:22.839745150 +0100[0m
+jboss     [37m@@ -1 +1,14 @@[0m
+jboss     [37m+[Unit][0m
+jboss     [37m+Description=jBoss Service  [0m
+jboss     [37m+After=network.target  [0m
+jboss     [37m+[Service][0m
+jboss     [37m+User=jboss [0m
+jboss     [37m+ExecStart=/bin/bash -c 'nohup /opt/jboss/bin/run.sh -b 192.168.2.3 &'[0m
+jboss     [37m+ExecStop=/bin/bash -c '/opt/jboss/bin/shutdown.sh -s 192.168.2.3[0m
+jboss     [37m+KillMode=process  [0m
+jboss     [37m+Restart=on-failure  [0m
+jboss     [37m+Type=simple  [0m
+jboss     [37m+[Install][0m
+jboss     [37m+WantedBy=multi-user.target  [0m
+jboss     [37m+[0m
+jboss [0m  * execute[systemctl daemon-reload] action run
+jboss     [32m- execute systemctl daemon-reload[0m
+jboss [0m  * cookbook_file[/opt/jboss/server/default/deploy/test.war] action create_if_missing
+jboss     [32m- create new file /opt/jboss/server/default/deploy/test.war[0m
+jboss     [32m- update content in file /opt/jboss/server/default/deploy/test.war from none to 4504b7[0m
+jboss     [37m(new content is binary, diff output suppressed)[0m
+jboss     [32m- change owner from '' to 'jboss'[0m
+jboss     [32m- change group from '' to 'jboss'[0m
+jboss [0m  * service[jboss] action enable
+jboss     [32m- enable service service[jboss][0m
+jboss [0m  * service[jboss] action restart
+jboss     [32m- restart service service[jboss][0m
+jboss [0m[0m
+jboss Running handlers:[0m
+jboss Running handlers complete
+jboss [0mChef Client finished, 10/11 resources updated in 01 minutes 10 seconds[0m
