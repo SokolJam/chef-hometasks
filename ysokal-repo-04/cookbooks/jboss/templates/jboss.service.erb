@@ -1,0 +1,13 @@
+[Unit]
+Description=jBoss Service  
+After=network.target  
+[Service]
+User=jboss 
+ExecStart=/bin/bash -c 'nohup /opt/jboss/bin/run.sh -b <%= @ip_jboss %> &'
+ExecStop=/bin/bash -c '/opt/jboss/bin/shutdown.sh -s <%= @ip_jboss %>
+KillMode=process  
+Restart=on-failure  
+Type=simple  
+[Install]
+WantedBy=multi-user.target  
+

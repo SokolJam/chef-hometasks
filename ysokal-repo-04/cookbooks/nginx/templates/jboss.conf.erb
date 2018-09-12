@@ -1,0 +1,9 @@
+server {
+    listen <%= @port_nginx -%>;
+    server_name <%= @ip_nginx -%>;
+    location /test/ {
+        proxy_set_header   X-Real-IP $remote_addr;
+        proxy_set_header   Host      $http_host;
+        proxy_pass         http://<%= @ip_jboss -%>:<%= @port_jboss -%>/<%= @dest_app -%>/;
+    }
+}
